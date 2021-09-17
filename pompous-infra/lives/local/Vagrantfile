@@ -2,5 +2,85 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "centos/8"
+  config.vm.define "es-master" do |cfg|
+    cfg.vm.box = "centos/8"
+    cfg.vm.provider "virtualbox" do |vb|
+        vb.name = "es-master"
+    end
+    cfg.vm.host_name = "es-master"
+    cfg.vm.network "private_network", ip: "192.168.101.10"
+    cfg.vm.network "forwarded_port", guest: 22, host: 60000, auto_correct: true, id: "ssh"
+  end
+
+  config.vm.define "es-data01" do |cfg|
+    cfg.vm.box = "centos/8"
+    cfg.vm.provider "virtualbox" do |vb|
+        vb.name = "es-data01"
+    end
+    cfg.vm.host_name = "es-data01"
+    cfg.vm.network "private_network", ip: "192.168.101.11"
+    cfg.vm.network "forwarded_port", guest: 22, host: 60001, auto_correct: true, id: "ssh"
+  end
+
+  config.vm.define "es-data02" do |cfg|
+    cfg.vm.box = "centos/8"
+    cfg.vm.provider "virtualbox" do |vb|
+        vb.name = "es-data02"
+    end
+    cfg.vm.host_name = "es-data02"
+    cfg.vm.network "private_network", ip: "192.168.101.12"
+    cfg.vm.network "forwarded_port", guest: 22, host: 60002, auto_correct: true, id: "ssh"
+  end
+
+  config.vm.define "agent01" do |cfg|
+    cfg.vm.box = "centos/8"
+    cfg.vm.provider "virtualbox" do |vb|
+        vb.name = "agent01"
+    end
+    cfg.vm.host_name = "agent01"
+    cfg.vm.network "private_network", ip: "192.168.101.13"
+    cfg.vm.network "forwarded_port", guest: 22, host: 60003, auto_correct: true, id: "ssh"
+  end
+
+  
+  config.vm.define "agent02" do |cfg|
+    cfg.vm.box = "centos/8"
+    cfg.vm.provider "virtualbox" do |vb|
+        vb.name = "agent02"
+    end
+    cfg.vm.host_name = "agent02"
+    cfg.vm.network "private_network", ip: "192.168.101.14"
+    cfg.vm.network "forwarded_port", guest: 22, host: 60004, auto_correct: true, id: "ssh"
+  end
+
+
+  config.vm.define "logstash01" do |cfg|
+    cfg.vm.box = "centos/8"
+    cfg.vm.provider "virtualbox" do |vb|
+        vb.name = "logstash01"
+    end
+    cfg.vm.host_name = "logstash01"
+    cfg.vm.network "private_network", ip: "192.168.101.15"
+    cfg.vm.network "forwarded_port", guest: 22, host: 60005, auto_correct: true, id: "ssh"
+  end
+
+  config.vm.define "logstash02" do |cfg|
+    cfg.vm.box = "centos/8"
+    cfg.vm.provider "virtualbox" do |vb|
+        vb.name = "logstash02"
+    end
+    cfg.vm.host_name = "logstash02"
+    cfg.vm.network "private_network", ip: "192.168.101.16"
+    cfg.vm.network "forwarded_port", guest: 22, host: 60006, auto_correct: true, id: "ssh"
+  end
+
+  config.vm.define "kibana" do |cfg|
+    cfg.vm.box = "centos/8"
+    cfg.vm.provider "virtualbox" do |vb|
+        vb.name = "kibana"
+    end
+    cfg.vm.host_name = "kibana"
+    cfg.vm.network "private_network", ip: "192.168.101.16"
+    cfg.vm.network "forwarded_port", guest: 22, host: 60006, auto_correct: true, id: "ssh"
+  end
 end
