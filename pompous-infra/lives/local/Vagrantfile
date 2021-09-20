@@ -54,24 +54,14 @@ Vagrant.configure("2") do |config|
   end
 
 
-  config.vm.define "logstash01" do |cfg|
+  config.vm.define "logstash" do |cfg|
     cfg.vm.box = "centos/8"
     cfg.vm.provider "virtualbox" do |vb|
-        vb.name = "logstash01"
+        vb.name = "logstash"
     end
-    cfg.vm.host_name = "logstash01"
+    cfg.vm.host_name = "logstash"
     cfg.vm.network "private_network", ip: "192.168.101.15"
     cfg.vm.network "forwarded_port", guest: 22, host: 60005, auto_correct: true, id: "ssh"
-  end
-
-  config.vm.define "logstash02" do |cfg|
-    cfg.vm.box = "centos/8"
-    cfg.vm.provider "virtualbox" do |vb|
-        vb.name = "logstash02"
-    end
-    cfg.vm.host_name = "logstash02"
-    cfg.vm.network "private_network", ip: "192.168.101.16"
-    cfg.vm.network "forwarded_port", guest: 22, host: 60006, auto_correct: true, id: "ssh"
   end
 
   config.vm.define "kibana" do |cfg|
@@ -82,5 +72,15 @@ Vagrant.configure("2") do |config|
     cfg.vm.host_name = "kibana"
     cfg.vm.network "private_network", ip: "192.168.101.16"
     cfg.vm.network "forwarded_port", guest: 22, host: 60006, auto_correct: true, id: "ssh"
+  end
+
+  config.vm.define "mysql" do |cfg|
+    cfg.vm.box = "centos/8"
+    cfg.vm.provider "virtualbox" do |vb|
+        vb.name = "mysql"
+    end
+    cfg.vm.host_name = "mysql"
+    cfg.vm.network "private_network", ip: "192.168.101.17"
+    cfg.vm.network "forwarded_port", guest: 22, host: 60007, auto_correct: true, id: "ssh"
   end
 end
