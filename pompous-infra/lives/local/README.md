@@ -31,7 +31,7 @@ $ vagrant up
 
 ```bash
 # vagrant up <머신 이름>
-$ vagrant up mysql
+$ vagrant up es-master
 ```
 
 ### 인프라스트럭처 VM 상태 확인
@@ -45,11 +45,11 @@ Current machine states:
 es-master                 running (virtualbox)
 es-data01                 running (virtualbox)
 es-data02                 running (virtualbox)
-agent01                   running (virtualbox)
-agent02                   running (virtualbox)
 logstash                  running (virtualbox)
 kibana                    running (virtualbox)
-nginx                     running (virtualbox)
+was01                     running (virtualbox)
+was02                     running (virtualbox)
+web01                     running (virtualbox)
 
 This environment represents multiple VMs. The VMs are all listed
 above with their current state. For more information about a specific
@@ -60,10 +60,10 @@ VM, run `vagrant status NAME`.
 
 ```bash
 # vagrant status <머신 이름>
-$ vagrant status nginx
+$ vagrant status es-master
 Current machine states:
 
-nginx                     running (virtualbox)
+es-master                  running (virtualbox)
 
 The VM is running. To stop this VM, you can run `vagrant halt` to
 shut it down forcefully, or you can run `vagrant suspend` to simply
@@ -77,8 +77,8 @@ simply run `vagrant up`.
 
 ```bash
 # vagrant ssh <머신 이름>
-$ vagrant ssh nginx
-[vagrant@nginx ~]$ 
+$ vagrant ssh es-master
+[vagrant@es-master ~]$ 
 ```
 
 접속 해제하려면 `exit` 명령어를 입력해야 한다.
@@ -95,7 +95,7 @@ $ vagrant halt
 
 ```bash
 # vagrant halt <머신 이름>
-$ vagrant halt nginx
+$ vagrant halt es-master
 ```
 
 ### 인프라스트럭처 삭제
