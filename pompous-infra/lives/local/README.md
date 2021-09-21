@@ -49,7 +49,7 @@ agent01                   running (virtualbox)
 agent02                   running (virtualbox)
 logstash                  running (virtualbox)
 kibana                    running (virtualbox)
-mysql                     running (virtualbox)
+nginx                     running (virtualbox)
 
 This environment represents multiple VMs. The VMs are all listed
 above with their current state. For more information about a specific
@@ -60,10 +60,10 @@ VM, run `vagrant status NAME`.
 
 ```bash
 # vagrant status <머신 이름>
-$ vagrant status mysql
+$ vagrant status nginx
 Current machine states:
 
-mysql                     running (virtualbox)
+nginx                     running (virtualbox)
 
 The VM is running. To stop this VM, you can run `vagrant halt` to
 shut it down forcefully, or you can run `vagrant suspend` to simply
@@ -77,8 +77,8 @@ simply run `vagrant up`.
 
 ```bash
 # vagrant ssh <머신 이름>
-$ vagrant ssh mysql
-[vagrant@mysql ~]$ 
+$ vagrant ssh nginx
+[vagrant@nginx ~]$ 
 ```
 
 접속 해제하려면 `exit` 명령어를 입력해야 한다.
@@ -95,7 +95,7 @@ $ vagrant halt
 
 ```bash
 # vagrant halt <머신 이름>
-$ vagrant halt mysql
+$ vagrant halt nginx
 ```
 
 ### 인프라스트럭처 삭제
