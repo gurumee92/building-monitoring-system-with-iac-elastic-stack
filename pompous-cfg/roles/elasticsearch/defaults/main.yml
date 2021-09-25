@@ -3,6 +3,9 @@
 version: 7.14.1
 os: linux
 arch: x86_64
-download_dest: /usr/tmp
-unarchive_dest: /usr/lib
-elasticsearch_dir: "{{unarchive_dest}}/elasticsearch"
+
+elasticsearch_dir_get_url_dest: /usr/tmp
+elasticsearch_dir_unarchive_dest: /usr/lib
+elasticsearch_dir: "{{elasticsearch_dir_unarchive_dest}}/elasticsearch"
+elasticsearch_user: elasticsearch
+elasticsearch_group: elasticsearch
