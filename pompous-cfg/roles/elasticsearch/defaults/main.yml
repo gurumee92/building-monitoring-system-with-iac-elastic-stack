@@ -1,2 +1,8 @@
 ---
 # defaults file for roles/elasticsearch
+version: 7.14.1
+os: linux
+arch: x86_64
+download_dest: /usr/tmp
+unarchive_dest: /usr/lib
+elasticsearch_dir: "{{unarchive_dest}}/elasticsearch"

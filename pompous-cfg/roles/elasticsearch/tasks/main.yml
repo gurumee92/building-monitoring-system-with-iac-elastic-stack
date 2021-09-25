@@ -1,6 +1,26 @@
 ---
 # tasks file for roles/elasticsearch
-- name: "yum update"
+- name: yum update
   yum:
     name: '*'
-    state: present
+    state: latest
+    update_cache: true
+    update_only: true
+
+- name: Download elasticsearch zip
+  get_url:
+    url: https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-{{ version }}-{{ os }}-{{ arch }}.tar.gz
+    dest: "{{ download_dest }}"
+  register: download
+
+- name: UnArchive elasticsearch zip
+  unarchive:
+    src: "{{ download_dest }}/elasticsearch-{{ version }}-{{ os }}-{{ arch }}.tar.gz"
+    dest: "{{  unarchive_dest }}"
+    remote_src: true
+    creates: "{{ elasticsearch_dir }}"
+
+- name: Rename elasticsearch
+  command: "mv {{ unarchive_dest }}/elasticsearch-{{ version }} {{ elasticsearch_dir }}"
+  args:
+    creates: "{{ elasticsearch_dir }}"
