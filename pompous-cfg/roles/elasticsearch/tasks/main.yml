@@ -1,2 +1,6 @@
 ---
 # tasks file for roles/elasticsearch
+- name: "yum update"
+  yum:
+    name: '*'
+    state: present

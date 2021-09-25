@@ -1,7 +1,7 @@
 [cluster]
-es-master ansible_host=127.0.0.1 ansible_port=60000 ansible_user=vagrant ansible_ssh_private_key_file=../../..//pompous-infra/lives/local/.vagrant/machines/es-master/virtualbox/private_key
-es-data01 ansible_host=127.0.0.1 ansible_port=60001 ansible_user=vagrant ansible_ssh_private_key_file=../../..//pompous-infra/lives/local/.vagrant/machines/es-master/virtualbox/private_key
-es-data02 ansible_host=127.0.0.1 ansible_port=60002 ansible_user=vagrant ansible_ssh_private_key_file=../../..//pompous-infra/lives/local/.vagrant/machines/es-master/virtualbox/private_key
+es-master ansible_host=127.0.0.1 ansible_port=60000 ansible_user=vagrant ansible_ssh_private_key_file=pompous-infra/lives/local/.vagrant/machines/es-master/virtualbox/private_key
+es-data01 ansible_host=127.0.0.1 ansible_port=60001 ansible_user=vagrant ansible_ssh_private_key_file=pompous-infra/lives/local/.vagrant/machines/es-data01/virtualbox/private_key
+es-data02 ansible_host=127.0.0.1 ansible_port=60002 ansible_user=vagrant ansible_ssh_private_key_file=pompous-infra/lives/local/.vagrant/machines/es-data02/virtualbox/private_key
 
 [master]
 es-master
