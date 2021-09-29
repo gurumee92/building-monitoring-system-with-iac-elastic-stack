@@ -32,36 +32,14 @@ Vagrant.configure("2") do |config|
     cfg.vm.network "forwarded_port", guest: 22, host: 60002, auto_correct: true, id: "ssh"
   end
 
-  config.vm.define "agent01" do |cfg|
-    cfg.vm.box = "centos/8"
-    cfg.vm.provider "virtualbox" do |vb|
-        vb.name = "agent01"
-    end
-    cfg.vm.host_name = "agent01"
-    cfg.vm.network "private_network", ip: "192.168.101.13"
-    cfg.vm.network "forwarded_port", guest: 22, host: 60003, auto_correct: true, id: "ssh"
-  end
-
-  
-  config.vm.define "agent02" do |cfg|
-    cfg.vm.box = "centos/8"
-    cfg.vm.provider "virtualbox" do |vb|
-        vb.name = "agent02"
-    end
-    cfg.vm.host_name = "agent02"
-    cfg.vm.network "private_network", ip: "192.168.101.14"
-    cfg.vm.network "forwarded_port", guest: 22, host: 60004, auto_correct: true, id: "ssh"
-  end
-
-
   config.vm.define "logstash" do |cfg|
     cfg.vm.box = "centos/8"
     cfg.vm.provider "virtualbox" do |vb|
         vb.name = "logstash"
     end
     cfg.vm.host_name = "logstash"
-    cfg.vm.network "private_network", ip: "192.168.101.15"
-    cfg.vm.network "forwarded_port", guest: 22, host: 60005, auto_correct: true, id: "ssh"
+    cfg.vm.network "private_network", ip: "192.168.101.13"
+    cfg.vm.network "forwarded_port", guest: 22, host: 60003, auto_correct: true, id: "ssh"
   end
 
   config.vm.define "kibana" do |cfg|
@@ -70,16 +48,36 @@ Vagrant.configure("2") do |config|
         vb.name = "kibana"
     end
     cfg.vm.host_name = "kibana"
+    cfg.vm.network "private_network", ip: "192.168.101.14"
+    cfg.vm.network "forwarded_port", guest: 22, host: 60004, auto_correct: true, id: "ssh"
+  end
+
+  config.vm.define "was01" do |cfg|
+    cfg.vm.box = "centos/8"
+    cfg.vm.provider "virtualbox" do |vb|
+        vb.name = "was01"
+    end
+    cfg.vm.host_name = "was01"
+    cfg.vm.network "private_network", ip: "192.168.101.15"
+    cfg.vm.network "forwarded_port", guest: 22, host: 60005, auto_correct: true, id: "ssh"
+  end
+
+  config.vm.define "was02" do |cfg|
+    cfg.vm.box = "centos/8"
+    cfg.vm.provider "virtualbox" do |vb|
+        vb.name = "was02"
+    end
+    cfg.vm.host_name = "was02"
     cfg.vm.network "private_network", ip: "192.168.101.16"
     cfg.vm.network "forwarded_port", guest: 22, host: 60006, auto_correct: true, id: "ssh"
   end
 
-  config.vm.define "mysql" do |cfg|
+  config.vm.define "web01" do |cfg|
     cfg.vm.box = "centos/8"
     cfg.vm.provider "virtualbox" do |vb|
-        vb.name = "mysql"
+        vb.name = "web01"
     end
-    cfg.vm.host_name = "mysql"
+    cfg.vm.host_name = "web01"
     cfg.vm.network "private_network", ip: "192.168.101.17"
     cfg.vm.network "forwarded_port", guest: 22, host: 60007, auto_correct: true, id: "ssh"
   end

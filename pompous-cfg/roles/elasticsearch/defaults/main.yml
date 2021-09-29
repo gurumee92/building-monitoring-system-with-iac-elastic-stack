@@ -1,0 +1,6 @@
+---
+# defaults file for roles/elasticsearch
+arch: x86_64
+
+java_version: 11
+elasticsearch_version: 7.x

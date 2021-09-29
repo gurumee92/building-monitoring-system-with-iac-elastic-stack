@@ -1,0 +1,32 @@
+---
+# tasks file for roles/elasticsearch
+- name: Upgrade all packages
+  yum: 
+    name: '*' 
+    state: latest
+
+- name: Install Java
+  yum: 
+    name: "java-{{ java_version }}-openjdk-devel.{{ arch  }}"
+    state: present
+
+- name: Import a Elasticsearch GPG-key
+  rpm_key:
+    state: present
+    key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+
+- name: Add Elasticsearch repository
+  yum_repository:
+    name: elasticsearch
+    description: "Elasticsearch repository for {{ elasticsearch_version }} packages"
+    baseurl: "https://artifacts.elastic.co/packages/{{ elasticsearch_version }}/yum"
+    gpgcheck: true
+    gpgkey: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    enabled: false
+
+- name: Install Elasticsearch
+  yum:
+    name: elasticsearch
+    enablerepo: elasticsearch
+    state: present
+
