@@ -1,41 +1,32 @@
 ---
 # tasks file for roles/elasticsearch
-- name: Create Elastiscearch group
-  group:
-    name: "{{ elasticsearch_group }}"
-    system: true
-
-- name: Create Elasticsearch user
-  user:
-    name: "{{ elasticsearch_user }}"
-    groups: "{{ elasticsearch_group }}"
-    system: true
-
-- name: Update all Yum repositories
-  yum:
-    name: '*'
+- name: Upgrade all packages
+  yum: 
+    name: '*' 
     state: latest
-    update_cache: true
-    update_only: true
 
-- name: Download Elasticsearch zip
-  get_url:
-    url: https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-{{ version }}-{{ os }}-{{ arch }}.tar.gz
-    dest: "{{ elasticsearch_dir_get_url_dest }}"
-    owner: "{{ elasticsearch_user }}"
-    group: "{{ elasticsearch_group }}"
-  register: download
+- name: Install Java
+  yum: 
+    name: "java-{{ java_version }}-openjdk-devel.{{ arch  }}"
+    state: present
 
-- name: UnArchive Elasticsearch zip
-  unarchive:
-    src: "{{ elasticsearch_dir_get_url_dest }}/elasticsearch-{{ version }}-{{ os }}-{{ arch }}.tar.gz"
-    dest: "{{  elasticsearch_dir_unarchive_dest }}"
-    remote_src: true
-    creates: "{{ elasticsearch_dir }}"
-    owner: "{{ elasticsearch_user }}"
-    group: "{{ elasticsearch_group }}"
+- name: Import a Elasticsearch GPG-key
+  rpm_key:
+    state: present
+    key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
 
-- name: Rename Elasticsearch
-  command: "mv {{ elasticsearch_dir_unarchive_dest }}/elasticsearch-{{ version }} {{ elasticsearch_dir }}"
-  args:
-    creates: "{{ elasticsearch_dir }}"
+- name: Add Elasticsearch repository
+  yum_repository:
+    name: elasticsearch
+    description: "Elasticsearch repository for {{ elasticsearch_version }} packages"
+    baseurl: "https://artifacts.elastic.co/packages/{{ elasticsearch_version }}/yum"
+    gpgcheck: true
+    gpgkey: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    enabled: false
+
+- name: Install Elasticsearch
+  yum:
+    name: elasticsearch
+    enablerepo: elasticsearch
+    state: present
+

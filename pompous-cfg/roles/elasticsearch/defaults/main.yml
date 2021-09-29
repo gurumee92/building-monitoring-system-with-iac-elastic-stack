@@ -1,11 +1,6 @@
 ---
 # defaults file for roles/elasticsearch
-version: 7.14.1
-os: linux
 arch: x86_64
 
-elasticsearch_dir_get_url_dest: /usr/tmp
-elasticsearch_dir_unarchive_dest: /usr/lib
-elasticsearch_dir: "{{elasticsearch_dir_unarchive_dest}}/elasticsearch"
-elasticsearch_user: elasticsearch
-elasticsearch_group: elasticsearch
+java_version: 11
+elasticsearch_version: 7.x
